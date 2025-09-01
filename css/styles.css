@@ -1,0 +1,128 @@
+:root {
+  --bg: #0b0d10;
+  --surface: #111418;
+  --text: #e6e8eb;
+  --muted: #a7b0ba;
+  --brand: #0ea5e9; /* cyan */
+  --brand-2: #22c55e; /* verde */
+  --chip: rgba(255,255,255,.06);
+  --border: rgba(255,255,255,.12);
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial;
+  color: var(--text);
+  line-height: 1.5;
+
+  /* 💡 Degradado ÚNICO, sin cortes */
+  background:
+    linear-gradient(180deg, #0b0d10 0%, #0f1418 40%, #0a1720 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;       /* evita “reinicios” al scrollear */
+  background-size: 100% 100%;         /* ocupa todo el lienzo */
+}
+
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Contenedor centrado y ancho uniforme */
+.wrap {
+  max-width: 860px;       /* prolijo */
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header (coincide con tu <header> sin clases) */
+/* Header */
+header {
+  position: sticky;   /* ahora queda anclado */
+  top: 0;
+  z-index: 100;       /* asegura que quede por encima de las tarjetas */
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav { display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+.nav .left { display: flex; align-items: center; gap: 14px; }
+.logo {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center; font-weight: 800;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  color: #001018; box-shadow: var(--shadow);
+  letter-spacing: .5px;
+}
+.name { font-size: 1.15rem; font-weight: 700; }
+.tag  { color: var(--muted); font-size: .95rem; }
+
+.actions { display: flex; gap: 10px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border);
+  background: #0f1317; color: var(--text); text-decoration: none; font-weight: 600;
+  box-shadow: var(--shadow);
+}
+.btn:hover { transform: translateY(-1px); }
+
+/* ===== 1 COLUMNA: tarjetas una debajo de la otra ===== */
+.section, .hero, .grid, .projects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tarjetas de ancho completo del contenedor */
+.card, .tl-item, .proj, .kv {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+/* Hero */
+.hero { padding: 28px 0 8px; }
+.avatar {
+  width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--border); display: block; margin: 0 0 12px; box-shadow: var(--shadow);
+}
+
+/* Títulos, chips */
+h1 { font-size: clamp(1.8rem, 2.6vw + 1rem, 3rem); margin: 0 0 8px; }
+.section h2 { margin: 16px 0 8px; font-size: 1.35rem; }
+.lead { font-size: 1.05rem; color: var(--muted); margin: 0 0 16px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 8px 12px; background: var(--chip); border: 1px solid var(--border); border-radius: 999px; font-weight: 600; }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 12px; }
+.tl-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.tl-item .meta { color: var(--muted); font-size: .95rem; margin-bottom: 8px; }
+
+/* “Grid” y spans de tu HTML pasan a 1 columna */
+.grid { display: flex; flex-direction: column; gap: 16px; }
+.span-8, .span-4 { width: 100%; }
+
+/* Aside info (no sticky) */
+.aside { position: static; display: flex; flex-direction: column; gap: 14px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0 0 6px; font-weight: 600; }
+
+/* Footer */
+footer { margin: 36px 0 64px; color: var(--muted); text-align: center; }
+
+/* Responsive: ya es 1 columna */
+@media (max-width: 480px) { .wrap { padding: 16px; } }
+
+/* Print */
+@media print {
+  header, .actions, .btn, footer { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .tl-item, .proj, .kv { box-shadow: none; border-color: #ddd; }
+}
